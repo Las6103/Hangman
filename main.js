@@ -1,3 +1,14 @@
+let mistake = document.querySelector("#mistakes");
+console.log(mistakes);
+
+let answer = document.querySelector("#answer");
+console.log(answer);
+
+// Create and randomize words
+let words = ["cheeto", "keyboard", "mascot", "cellphone", "valorant", "array"];
+let word = words[Math.floor(Math.random() * words.length)];
+console.log(word);
+
 // Create Buttons
 function createButtons() {
   let buttons = document.querySelector(".buttons");
@@ -36,18 +47,3 @@ function createButtons() {
   });
 }
 createButtons();
-
-// Create and randomize words
-function randomWords() {
-  let words = [
-    "cheeto",
-    "keyboard",
-    "mascot",
-    "cellphone",
-    "valorant",
-    "array",
-  ];
-  let word = words[Math.floor(Math.random() * words.length)];
-  console.log(word);
-}
-randomWords();
