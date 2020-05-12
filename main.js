@@ -37,8 +37,17 @@ function createButtons() {
 }
 createButtons();
 
-// Create Words
-let words = ['cheeto','keyboard', 'mascot','cellphone', 'valorant', 'array'];
-// Randomize word
-let word = words[Math.floor(Math.random() * words.length)];
-console.log(word);
+// Create and randomize words
+function randomWords() {
+  let words = [
+    "cheeto",
+    "keyboard",
+    "mascot",
+    "cellphone",
+    "valorant",
+    "array",
+  ];
+  let word = words[Math.floor(Math.random() * words.length)];
+  console.log(word);
+}
+randomWords();
