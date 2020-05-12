@@ -1,7 +1,6 @@
-let buttons = document.querySelector(".buttons");
-
 // Create Buttons
 function createButtons() {
+  let buttons = document.querySelector(".buttons");
   let keys = [
     "a",
     "b",
@@ -32,8 +31,14 @@ function createButtons() {
   keys.forEach((key) => {
     let letters = document.createElement("button");
     letters.innerHTML = key;
-    letters.classList.add('keys');
+    letters.classList.add("keys");
     buttons.appendChild(letters);
   });
 }
 createButtons();
+
+// Create Words
+let words = ['cheeto','keyboard', 'mascot','cellphone', 'valorant', 'array'];
+// Randomize word
+let word = words[Math.floor(Math.random() * words.length)];
+console.log(word);
