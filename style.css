@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    text-align: center;
+}
+
+.keys {
+    padding: 1rem;
+    outline: none;
+    font-size: 1.2rem;
+}
