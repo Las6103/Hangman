@@ -1,26 +1,17 @@
+// Global Variables
 let mistake = document.querySelector("#mistakes");
+
+let numOfMistakes = parseInt(mistake.innerText);
+console.log(numOfMistakes);
+
 let answer = document.querySelector(".answer");
-let selectors = document.querySelectorAll(".keys");
-let guessedWords = [];
+let selectedChars = [];
+let originalWord = [];
 
 // Create and randomize words
 let words = ["cheeto", "keyboard", "mascot", "cellphone", "valorant", "array"];
 let word = words[Math.floor(Math.random() * words.length)];
 
-<<<<<<< HEAD
-=======
-function wordToGuess() {
-  let chars = word.split("");
-  chars.forEach((char) => {
-    let span = document.createElement("span");
-    let originalWord = char;
-    span.innerText = ' _ ';
-    answer.appendChild(span);
-  });
-}
-wordToGuess();
-
->>>>>>> parent of 4387387... created Hangman Logic
 // Create Buttons
 function createButtons() {
   let buttons = document.querySelector(".buttons");
@@ -60,32 +51,44 @@ function createButtons() {
 }
 createButtons();
 
+let selectors = document.querySelectorAll(".keys");
+// Grab EVT Target
+selectors.forEach((selector) => {
+  selector.addEventListener("click", function (evt) {
+    evt.preventDefault();
+    let clicked = evt.target.innerText;
+    selectedChars.push(clicked);
+    renderHangmanWord();
+  });
+});
+
 // Game Logic
 function renderHangmanWord() {
-  let chars = word.split("");
+  let charsArr = word.split("");
   answer.innerHTML = null;
-  chars.forEach((char) => {
+  let mistakeFlag = false;
+  
+  mistake.innerHTML = numOfMistakes;
+  charsArr.forEach((char) => {
     let span = document.createElement("span");
     originalWord = char;
+    
     if (selectedChars.includes(char)) {
       span.innerText = char;
       // WHAT HAPPENS WHEN YOU WIN???
     } else {
       span.innerText = " _ ";
       // WHAT HAPPENS WHEN YOU PRESS WRONG LETTER???
+      mistakeFlag = true;
     }
     answer.appendChild(span);
   });
+
+  if (mistakeFlag) {
+    numOfMistakes++;
+  }
+  if (numOfMistakes >= 6) {
+    alert("game over");
+  }
 }
 renderHangmanWord();
-
-// Grab EVT Target
-selectors.forEach((selector) => {
-  selector.addEventListener("click", function (evt) {
-    evt.preventDefault();
-    console.log(evt.target.innerText);
-    let clicked = evt.target.innerText;
-    selectedChars.push(clicked);
-    renderHangmanWord();
-  });
-});
