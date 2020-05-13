@@ -1,15 +1,26 @@
-// Global Variables
 let mistake = document.querySelector("#mistakes");
 let answer = document.querySelector(".answer");
 let selectors = document.querySelectorAll(".keys");
 let guessedWords = [];
-let selectedChars = [];
-let originalWord = null;
 
 // Create and randomize words
 let words = ["cheeto", "keyboard", "mascot", "cellphone", "valorant", "array"];
 let word = words[Math.floor(Math.random() * words.length)];
 
+<<<<<<< HEAD
+=======
+function wordToGuess() {
+  let chars = word.split("");
+  chars.forEach((char) => {
+    let span = document.createElement("span");
+    let originalWord = char;
+    span.innerText = ' _ ';
+    answer.appendChild(span);
+  });
+}
+wordToGuess();
+
+>>>>>>> parent of 4387387... created Hangman Logic
 // Create Buttons
 function createButtons() {
   let buttons = document.querySelector(".buttons");
