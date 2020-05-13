@@ -1,15 +1,14 @@
 // Global Variables
 let mistake = document.querySelector("#mistakes");
-
+console.log(mistake);
 let numOfMistakes = parseInt(mistake.innerText);
 console.log(numOfMistakes);
 
 let answer = document.querySelector(".answer");
 let selectedChars = [];
-let originalWord = [];
 
 // Create and randomize words
-let words = ["cheeto", "keyboard", "mascot", "cellphone", "valorant", "array"];
+let words = ["cheeto"];
 let word = words[Math.floor(Math.random() * words.length)];
 
 // Create Buttons
@@ -57,38 +56,44 @@ selectors.forEach((selector) => {
   selector.addEventListener("click", function (evt) {
     evt.preventDefault();
     let clicked = evt.target.innerText;
-    selectedChars.push(clicked);
+    let disable = evt.target;
+    pushClicked(clicked);
+    disableKey(disable);
     renderHangmanWord();
+    renderHangmanMistakes(clicked);
   });
 });
 
-// Game Logic
+function pushClicked(clicked) {
+  selectedChars.push(clicked);
+}
+
+function disableKey(disable) {
+  disable.disabled = true;
+}
+
+//
 function renderHangmanWord() {
   let charsArr = word.split("");
   answer.innerHTML = null;
-  let mistakeFlag = false;
-  
-  mistake.innerHTML = numOfMistakes;
   charsArr.forEach((char) => {
     let span = document.createElement("span");
-    originalWord = char;
-    
     if (selectedChars.includes(char)) {
       span.innerText = char;
-      // WHAT HAPPENS WHEN YOU WIN???
     } else {
       span.innerText = " _ ";
-      // WHAT HAPPENS WHEN YOU PRESS WRONG LETTER???
-      mistakeFlag = true;
     }
     answer.appendChild(span);
   });
+}
 
-  if (mistakeFlag) {
+// Mistakes
+function renderHangmanMistakes(clicked) {
+  if (!word.includes(clicked)) {
     numOfMistakes++;
   }
   if (numOfMistakes >= 6) {
     alert("game over");
   }
+  mistake.innerHTML = numOfMistakes;
 }
-renderHangmanWord();
