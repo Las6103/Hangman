@@ -8,6 +8,16 @@ let selectedChars = [];
 let words = ["cheeto"];
 let word = words[Math.floor(Math.random() * words.length)];
 
+const gallowsImages = {
+  gallow: '/css/First-Image.png',
+  head: '/css/Second-Image.png',
+  body: '/css/Third-Image.png',
+  lArm: '/css/Fourth-Image.png',
+  rArm: '/css/Fifth-Image.png',
+  lLeg: '/css/Sixth-Image.png',
+  rLeg: '/css/Dead'
+}
+
 /**
  * Creates buttons and adds to DOM
  */
