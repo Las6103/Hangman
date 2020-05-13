@@ -1,22 +1,21 @@
 let mistake = document.querySelector("#mistakes");
-console.log(mistakes);
-
-let answer = document.querySelector("#answer");
-console.log(answer);
-let answerarray =[];
+let answer = document.querySelector(".answer");
+let guessedWords = [];
 
 // Create and randomize words
 let words = ["cheeto", "keyboard", "mascot", "cellphone", "valorant", "array"];
 let word = words[Math.floor(Math.random() * words.length)];
-console.log(word);
 
 function wordToGuess() {
-    answer.innerHTML = word;
-    word.split(' ');
-    console.log(word);
+  let chars = word.split("");
+  chars.forEach((char) => {
+    let span = document.createElement("span");
+    let originalWord = char;
+    span.innerText = ' _ ';
+    answer.appendChild(span);
+  });
 }
 wordToGuess();
-
 
 // Create Buttons
 function createButtons() {
