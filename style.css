@@ -12,3 +12,8 @@ body {
     outline: none;
     font-size: 1.2rem;
 }
+
+.keys:hover {
+    background-color: beige;
+    cursor: pointer;
+}

@@ -3,11 +3,20 @@ console.log(mistakes);
 
 let answer = document.querySelector("#answer");
 console.log(answer);
+let answerarray =[];
 
 // Create and randomize words
 let words = ["cheeto", "keyboard", "mascot", "cellphone", "valorant", "array"];
 let word = words[Math.floor(Math.random() * words.length)];
 console.log(word);
+
+function wordToGuess() {
+    answer.innerHTML = word;
+    word.split(' ');
+    console.log(word);
+}
+wordToGuess();
+
 
 // Create Buttons
 function createButtons() {
