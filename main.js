@@ -1,6 +1,7 @@
 // Global Variables
 let mistake = document.querySelector("#mistakes");
 let answer = document.querySelector(".answer");
+let selectors = document.querySelectorAll(".keys");
 let guessedWords = [];
 let selectedChars = [];
 let originalWord = null;
@@ -8,25 +9,6 @@ let originalWord = null;
 // Create and randomize words
 let words = ["cheeto", "keyboard", "mascot", "cellphone", "valorant", "array"];
 let word = words[Math.floor(Math.random() * words.length)];
-
-
-function renderHangmanWord() {
-  let chars = word.split("");
-  answer.innerHTML = null;
-  chars.forEach((char) => {
-    let span = document.createElement("span");
-    originalWord = char;
-    if (selectedChars.includes(char)) {
-      span.innerText = char;
-
-    } else {
-      span.innerText = " _ ";
-    
-    }
-    answer.appendChild(span);
-  });
-}
-renderHangmanWord();
 
 // Create Buttons
 function createButtons() {
@@ -67,8 +49,26 @@ function createButtons() {
 }
 createButtons();
 
-let selectors = document.querySelectorAll(".keys");
+// Game Logic
+function renderHangmanWord() {
+  let chars = word.split("");
+  answer.innerHTML = null;
+  chars.forEach((char) => {
+    let span = document.createElement("span");
+    originalWord = char;
+    if (selectedChars.includes(char)) {
+      span.innerText = char;
+      // WHAT HAPPENS WHEN YOU WIN???
+    } else {
+      span.innerText = " _ ";
+      // WHAT HAPPENS WHEN YOU PRESS WRONG LETTER???
+    }
+    answer.appendChild(span);
+  });
+}
+renderHangmanWord();
 
+// Grab EVT Target
 selectors.forEach((selector) => {
   selector.addEventListener("click", function (evt) {
     evt.preventDefault();
