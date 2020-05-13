@@ -1,9 +1,6 @@
 // Global Variables
 let mistake = document.querySelector("#mistakes");
-console.log(mistake);
 let numOfMistakes = parseInt(mistake.innerText);
-console.log(numOfMistakes);
-
 let answer = document.querySelector(".answer");
 let selectedChars = [];
 
@@ -11,7 +8,9 @@ let selectedChars = [];
 let words = ["cheeto"];
 let word = words[Math.floor(Math.random() * words.length)];
 
-// Create Buttons
+/**
+ * Creates buttons and adds to DOM
+ */
 function createButtons() {
   let buttons = document.querySelector(".buttons");
   let keys = [
@@ -50,8 +49,10 @@ function createButtons() {
 }
 createButtons();
 
+/**
+ * Adds Click Event To All Buttons
+ */
 let selectors = document.querySelectorAll(".keys");
-// Grab EVT Target
 selectors.forEach((selector) => {
   selector.addEventListener("click", function (evt) {
     evt.preventDefault();
@@ -64,15 +65,25 @@ selectors.forEach((selector) => {
   });
 });
 
+/**
+ * Push clicked to array
+ * @param {string} clicked
+ */
 function pushClicked(clicked) {
   selectedChars.push(clicked);
 }
 
+/**
+ * Disable Key Once Clicked
+ * @param {HTMLElement} disable
+ */
 function disableKey(disable) {
   disable.disabled = true;
 }
 
-//
+/**
+ * Checks onclick if clicked key is included in word array
+ */
 function renderHangmanWord() {
   let charsArr = word.split("");
   answer.innerHTML = null;
@@ -87,7 +98,10 @@ function renderHangmanWord() {
   });
 }
 
-// Mistakes
+/**
+ * Generate Mistakes
+ * @param {string} clicked
+ */
 function renderHangmanMistakes(clicked) {
   if (!word.includes(clicked)) {
     numOfMistakes++;
