@@ -1,21 +1,32 @@
+// Global Variables
 let mistake = document.querySelector("#mistakes");
 let answer = document.querySelector(".answer");
 let guessedWords = [];
+let selectedChars = [];
+let originalWord = null;
 
 // Create and randomize words
 let words = ["cheeto", "keyboard", "mascot", "cellphone", "valorant", "array"];
 let word = words[Math.floor(Math.random() * words.length)];
 
-function wordToGuess() {
+
+function renderHangmanWord() {
   let chars = word.split("");
+  answer.innerHTML = null;
   chars.forEach((char) => {
     let span = document.createElement("span");
-    let originalWord = char;
-    span.innerText = ' _ ';
+    originalWord = char;
+    if (selectedChars.includes(char)) {
+      span.innerText = char;
+
+    } else {
+      span.innerText = " _ ";
+    
+    }
     answer.appendChild(span);
   });
 }
-wordToGuess();
+renderHangmanWord();
 
 // Create Buttons
 function createButtons() {
@@ -55,3 +66,15 @@ function createButtons() {
   });
 }
 createButtons();
+
+let selectors = document.querySelectorAll(".keys");
+
+selectors.forEach((selector) => {
+  selector.addEventListener("click", function (evt) {
+    evt.preventDefault();
+    console.log(evt.target.innerText);
+    let clicked = evt.target.innerText;
+    selectedChars.push(clicked);
+    renderHangmanWord();
+  });
+});
