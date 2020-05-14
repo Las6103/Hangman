@@ -2,8 +2,9 @@
 let mistake = document.querySelector("#mistakes");
 let numOfMistakes = parseInt(mistake.innerText);
 let answer = document.querySelector(".answer");
-let winner = document.querySelector('.winner');
+let winner = document.querySelector(".winner");
 let selectedChars = [];
+
 
 // Create and randomize words
 let words = ["cheeto"];
@@ -34,6 +35,7 @@ function createButtons() {
     "f",
     "g",
     "h",
+    "i",
     "j",
     "k",
     "l",
@@ -60,7 +62,6 @@ function createButtons() {
   });
 }
 
-
 /**
  * Adds Click Event To All Buttons
  */
@@ -78,6 +79,7 @@ function eventListener() {
     });
   });
 }
+
 /**
  * Push clicked to array
  * @param {string} clicked
@@ -99,16 +101,24 @@ function disableKey(disable) {
  */
 function renderHangmanWord() {
   let charsArr = word.split("");
+  console.log(charsArr);
   answer.innerHTML = null;
   charsArr.forEach((char) => {
     let span = document.createElement("span");
+    span.classList.add("hangmanword");
     if (selectedChars.includes(char)) {
       span.innerText = char;
+      counter();
     } else {
       span.innerText = " _ ";
     }
     answer.appendChild(span);
   });
+}
+
+function counter() {
+  let count = 0;
+  console.log(count);
 }
 
 /**
@@ -126,16 +136,16 @@ function renderHangmanMistakes(clicked) {
   renderImage(numOfMistakes);
 }
 
-// Declares Winner and Resets Game
+// Declares Outcome and Resets Game
 function reset() {
-  winner.classList.remove('hidden');
-  if (confirm("game over")) {
+  // winner.classList.remove('hidden');
+  if (confirm("Game Over, you're trash!")) {
     numOfMistakes = 0;
     let activateKeys = document.querySelectorAll(".keys");
     activateKeys.forEach((activateKey) => {
       activateKey.disabled = false;
     });
-    winner.classList.add('hidden');
+    // winner.classList.add('hidden');
     word = words[Math.floor(Math.random() * words.length)];
     selectedChars = [];
     renderHangmanWord();
@@ -153,6 +163,10 @@ function renderImage(numOfMistakes) {
   let index = numOfMistakes;
   image.src = gallowsImages[index];
 }
+
 createButtons();
 eventListener();
 renderHangmanWord();
+
+console.log(word);
+console.log(selectedChars);

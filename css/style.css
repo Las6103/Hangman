@@ -3,17 +3,33 @@
   padding: 0;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+html {
+  background-color: #d3d3d3;
+}
 body {
   text-align: center;
+  font-family: 'Anton', sans-serif;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .title {
-    font-size: 1.4rem;
+    font-size: 3.0rem;
+    margin: 1rem 0;
+}
+
+.guessing {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.gallow {
+  border-radius: 2rem;
 }
 
 .buttons {
-  width: 1100px;
-  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(9, 1fr);
 }
@@ -23,6 +39,11 @@ body {
   outline: none;
   font-size: 1.2rem;
   margin: .5rem;
+  border: 2px solid white;
+  border-radius: 1rem;
+  background-color: #5bc0de;
+  color: white;
+  font-size: 2rem;
 }
 
 .keys:hover {
@@ -34,3 +55,24 @@ body {
   display: none;
 }
 
+.padding {
+  padding: .5rem .5rem;
+}
+
+@media (max-width: 930px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 680px) {
+  .buttons {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (max-width: 450px) {
+  .buttons {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
