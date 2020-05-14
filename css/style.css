@@ -29,3 +29,8 @@ body {
   background-color: beige;
   cursor: pointer;
 }
+
+.hidden {
+  display: none;
+}
+

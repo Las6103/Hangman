@@ -2,21 +2,23 @@
 let mistake = document.querySelector("#mistakes");
 let numOfMistakes = parseInt(mistake.innerText);
 let answer = document.querySelector(".answer");
+let winner = document.querySelector('.winner');
 let selectedChars = [];
 
 // Create and randomize words
 let words = ["cheeto"];
 let word = words[Math.floor(Math.random() * words.length)];
 
-const gallowsImages = {
-  gallow: '/css/First-Image.png',
-  head: '/css/Second-Image.png',
-  body: '/css/Third-Image.png',
-  lArm: '/css/Fourth-Image.png',
-  rArm: '/css/Fifth-Image.png',
-  lLeg: '/css/Sixth-Image.png',
-  rLeg: '/css/Dead'
-}
+// Images
+const gallowsImages = [
+  "/css/First-Image.png",
+  "/css/Second-Image.png",
+  "/css/Third-Image.png",
+  "/css/Fourth-Image.png",
+  "/css/Fifth-Image.png",
+  "/css/Sixth-Image.png",
+  "/css/Dead.png",
+];
 
 /**
  * Creates buttons and adds to DOM
@@ -57,24 +59,25 @@ function createButtons() {
     buttons.appendChild(letters);
   });
 }
-createButtons();
+
 
 /**
  * Adds Click Event To All Buttons
  */
-let selectors = document.querySelectorAll(".keys");
-selectors.forEach((selector) => {
-  selector.addEventListener("click", function (evt) {
-    evt.preventDefault();
-    let clicked = evt.target.innerText;
-    let disable = evt.target;
-    pushClicked(clicked);
-    disableKey(disable);
-    renderHangmanWord();
-    renderHangmanMistakes(clicked);
+function eventListener() {
+  let selectors = document.querySelectorAll(".keys");
+  selectors.forEach((selector) => {
+    selector.addEventListener("click", function (evt) {
+      evt.preventDefault();
+      let clicked = evt.target.innerText;
+      let disable = evt.target;
+      pushClicked(clicked);
+      disableKey(disable);
+      renderHangmanWord();
+      renderHangmanMistakes(clicked);
+    });
   });
-});
-
+}
 /**
  * Push clicked to array
  * @param {string} clicked
@@ -117,7 +120,39 @@ function renderHangmanMistakes(clicked) {
     numOfMistakes++;
   }
   if (numOfMistakes >= 6) {
-    alert("game over");
+    reset();
   }
   mistake.innerHTML = numOfMistakes;
+  renderImage(numOfMistakes);
 }
+
+// Declares Winner and Resets Game
+function reset() {
+  winner.classList.remove('hidden');
+  if (confirm("game over")) {
+    numOfMistakes = 0;
+    let activateKeys = document.querySelectorAll(".keys");
+    activateKeys.forEach((activateKey) => {
+      activateKey.disabled = false;
+    });
+    winner.classList.add('hidden');
+    word = words[Math.floor(Math.random() * words.length)];
+    selectedChars = [];
+    renderHangmanWord();
+  } else {
+    console.log("Click on OK to reset");
+  }
+}
+
+/**
+ * Updates image off of mistake count
+ * @param {number} numOfMistakes
+ */
+function renderImage(numOfMistakes) {
+  let image = document.querySelector(".gallow");
+  let index = numOfMistakes;
+  image.src = gallowsImages[index];
+}
+createButtons();
+eventListener();
+renderHangmanWord();
