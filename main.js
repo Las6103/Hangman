@@ -9,6 +9,7 @@ let selectedChars = [];
 let words = null;
 let word = null;
 
+// Pulls array from api, randomizes, renders word
 fetch("https://random-word-api.herokuapp.com/word?number=1000")
   .then((unParsedData) => unParsedData.json())
   .then((parsedData) => {
@@ -59,6 +60,7 @@ function createButtons() {
     "x",
     "y",
     "z",
+    "!Click",
   ];
   keys.forEach((key) => {
     let letters = document.createElement("button");
