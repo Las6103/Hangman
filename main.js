@@ -6,27 +6,17 @@ let winner = document.querySelector(".winner");
 let loser = document.querySelector(".loser");
 let resetButton = document.querySelector(".reset");
 let selectedChars = [];
+let words = null;
+let word = null;
 
-
-fetch("https://random-word-api.herokuapp.com/all")
-.then(unParsedData => unParsedData.json())
-.then(parsedData => {
-  
-  console.log(parsedData)
-
-})
-// Create and randomize words
-let words = [
-  "cheeto",
-  "valorant",
-  "visitor",
-  "mousepad",
-  "keyboard",
-  "macbook",
-  "snowboard",
-  "clipboard",
-];
-let word = words[Math.floor(Math.random() * words.length)];
+fetch("https://random-word-api.herokuapp.com/word?number=1000")
+  .then((unParsedData) => unParsedData.json())
+  .then((parsedData) => {
+    words = parsedData;
+    word = words[Math.floor(Math.random() * words.length)];
+    renderHangmanWord();
+    console.log(word);
+  });
 
 // Images
 const gallowsImages = [
@@ -173,6 +163,7 @@ function checkForLoser() {
 // Declares Outcome and Resets Game
 function reset() {
   numOfMistakes = 0;
+  mistake.innerHTML = numOfMistakes;
   let activateKeys = document.querySelectorAll(".keys");
   activateKeys.forEach((activateKey) => {
     activateKey.disabled = false;
@@ -183,18 +174,17 @@ function reset() {
   word = words[Math.floor(Math.random() * words.length)];
   selectedChars = [];
   renderHangmanWord();
+  renderImage(numOfMistakes);
 }
 
 /**
  * Updates image off of mistake count
  * @param {number} numOfMistakes
  */
-function renderImage(numOfMistakes) {
+function renderImage(index) {
   let image = document.querySelector(".gallow");
-  let index = numOfMistakes;
   image.src = gallowsImages[index];
 }
 
 createButtons();
 eventListener();
-renderHangmanWord();
