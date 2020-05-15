@@ -59,7 +59,8 @@ function createButtons() {
     "w",
     "x",
     "y",
-    "z"
+    "z",
+    "?"
   ];
   keys.forEach((key) => {
     let letters = document.createElement("button");
