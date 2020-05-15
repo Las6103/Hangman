@@ -16,7 +16,6 @@ fetch("https://random-word-api.herokuapp.com/word?number=1000")
     words = parsedData;
     word = words[Math.floor(Math.random() * words.length)];
     renderHangmanWord();
-    console.log(word);
   });
 
 // Images
