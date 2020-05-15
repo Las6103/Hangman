@@ -3,13 +3,21 @@ let mistake = document.querySelector("#mistakes");
 let numOfMistakes = parseInt(mistake.innerText);
 let answer = document.querySelector(".answer");
 let winner = document.querySelector(".winner");
-let loser = document.querySelector('.loser');
-let resetButton = document.querySelector('.reset');
+let loser = document.querySelector(".loser");
+let resetButton = document.querySelector(".reset");
 let selectedChars = [];
 
-
 // Create and randomize words
-let words = ["cheeto", "valorant", "visitor", "mousepad", "keyboard", "macbook", "snowboard", "clipboard"];
+let words = [
+  "cheeto",
+  "valorant",
+  "visitor",
+  "mousepad",
+  "keyboard",
+  "macbook",
+  "snowboard",
+  "clipboard",
+];
 let word = words[Math.floor(Math.random() * words.length)];
 
 // Images
@@ -23,9 +31,7 @@ const gallowsImages = [
   "/css/Dead.png",
 ];
 
-/**
- * Creates buttons and adds to DOM
- */
+// Creates buttons and adds to DOM
 function createButtons() {
   let buttons = document.querySelector(".buttons");
   let keys = [
@@ -64,9 +70,7 @@ function createButtons() {
   });
 }
 
-/**
- * Adds Click Event To All Buttons
- */
+// Adds Click Event To All Buttons
 function eventListener() {
   let selectors = document.querySelectorAll(".keys");
   selectors.forEach((selector) => {
@@ -81,6 +85,9 @@ function eventListener() {
     });
   });
 }
+
+// Resets Game on Click
+resetButton.addEventListener("click", reset);
 
 /**
  * Push clicked to array
@@ -98,9 +105,7 @@ function disableKey(disable) {
   disable.disabled = true;
 }
 
-/**
- * Checks onclick if clicked key is included in word array
- */
+// Checks onclick if clicked key is included in word array
 function renderHangmanWord() {
   let charsArr = word.split("");
   answer.innerHTML = null;
@@ -114,8 +119,8 @@ function renderHangmanWord() {
     }
     answer.appendChild(span);
   });
-  let hangmanSpan = document.querySelectorAll('.hangmanword');
-      checkForWinner(hangmanSpan, charsArr);
+  let hangmanSpan = document.querySelectorAll(".hangmanword");
+  checkForWinner(hangmanSpan, charsArr);
 }
 
 /**
@@ -133,35 +138,34 @@ function renderHangmanMistakes(clicked) {
   renderImage(numOfMistakes);
 }
 
-resetButton.addEventListener('click', reset);
-
-// check for winner
+// Checks for winner and winner items appear
 function checkForWinner(hangmanSpan, charsArr) {
   if (hangmanSpan.length === charsArr.length) {
-    winner.classList.remove('hidden');
-    resetButton.classList.remove('hidden');
+    winner.classList.remove("hidden");
+    resetButton.classList.remove("hidden");
   }
 }
 
+// Loser Items Appear
 function checkForLoser() {
-loser.classList.remove('hidden');
-resetButton.classList.remove('hidden');
+  loser.classList.remove("hidden");
+  resetButton.classList.remove("hidden");
 }
 
 // Declares Outcome and Resets Game
 function reset() {
-    numOfMistakes = 0;
-    let activateKeys = document.querySelectorAll(".keys");
-    activateKeys.forEach((activateKey) => {
-      activateKey.disabled = false;
-    });
-    winner.classList.add('hidden');
-    loser.classList.add('hidden');
-    resetButton.classList.add('hidden');
-    word = words[Math.floor(Math.random() * words.length)];
-    selectedChars = [];
-    renderHangmanWord();
-  // } 
+  numOfMistakes = 0;
+  let activateKeys = document.querySelectorAll(".keys");
+  activateKeys.forEach((activateKey) => {
+    activateKey.disabled = false;
+  });
+  winner.classList.add("hidden");
+  loser.classList.add("hidden");
+  resetButton.classList.add("hidden");
+  word = words[Math.floor(Math.random() * words.length)];
+  selectedChars = [];
+  renderHangmanWord();
+  // }
 }
 
 /**
@@ -179,5 +183,3 @@ eventListener();
 renderHangmanWord();
 
 console.log(word);
-
-
