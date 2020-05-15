@@ -7,6 +7,14 @@ let loser = document.querySelector(".loser");
 let resetButton = document.querySelector(".reset");
 let selectedChars = [];
 
+
+fetch("https://random-word-api.herokuapp.com/all")
+.then(unParsedData => unParsedData.json())
+.then(parsedData => {
+  
+  console.log(parsedData)
+
+})
 // Create and randomize words
 let words = [
   "cheeto",
@@ -22,13 +30,13 @@ let word = words[Math.floor(Math.random() * words.length)];
 
 // Images
 const gallowsImages = [
-  "/css/First-Image.png",
-  "/css/Second-Image.png",
-  "/css/Third-Image.png",
-  "/css/Fourth-Image.png",
-  "/css/Fifth-Image.png",
-  "/css/Sixth-Image.png",
-  "/css/Dead.png",
+  "./css/First-Image.png",
+  "./css/Second-Image.png",
+  "./css/Third-Image.png",
+  "./css/Fourth-Image.png",
+  "./css/Fifth-Image.png",
+  "./css/Sixth-Image.png",
+  "./css/Dead.png",
 ];
 
 // Creates buttons and adds to DOM
@@ -138,11 +146,20 @@ function renderHangmanMistakes(clicked) {
   renderImage(numOfMistakes);
 }
 
+// Disable All Keys On Outcome
+function disableAll() {
+  let allKeys = document.querySelectorAll(".keys");
+  allKeys.forEach((key) => {
+    key.disabled = true;
+  });
+}
+
 // Checks for winner and winner items appear
 function checkForWinner(hangmanSpan, charsArr) {
   if (hangmanSpan.length === charsArr.length) {
     winner.classList.remove("hidden");
     resetButton.classList.remove("hidden");
+    disableAll();
   }
 }
 
@@ -150,6 +167,7 @@ function checkForWinner(hangmanSpan, charsArr) {
 function checkForLoser() {
   loser.classList.remove("hidden");
   resetButton.classList.remove("hidden");
+  disableAll();
 }
 
 // Declares Outcome and Resets Game
@@ -165,7 +183,6 @@ function reset() {
   word = words[Math.floor(Math.random() * words.length)];
   selectedChars = [];
   renderHangmanWord();
-  // }
 }
 
 /**
@@ -181,5 +198,3 @@ function renderImage(numOfMistakes) {
 createButtons();
 eventListener();
 renderHangmanWord();
-
-console.log(word);
